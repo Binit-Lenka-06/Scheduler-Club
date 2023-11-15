@@ -180,13 +180,13 @@ const EventModel = () => {
                 <div className="flex flex-col gap-y-2">
                     <div>Event Start Date</div>
                     <DatePicker
-                    minDate={dayjs()}
+                    minDate={new Date()}
                     value={date}
                     useRange={false}
                     asSingle={true}
                     popoverDirection="down"
-                    onChange={(values) => {
-                        setDate(values)
+                    onChange={(values: any) => {
+                        setDate({startDate: values, endDate: values})
                     }}
                     displayFormat="DD/MM/YYYY"
                     inputClassName={"bg-[#404040] w-full rounded-md p-3 focus:ring-0 focus:outline-none placeholder:text-white text-white"}
@@ -203,7 +203,7 @@ const EventModel = () => {
                     useRange={false}
                     asSingle={true}
                     popoverDirection="down"
-                    onChange={(values) => {
+                    onChange={(values: any) => {
                         setEndDate(values)
                     }}
                     displayFormat="DD/MM/YYYY"
@@ -221,7 +221,7 @@ const EventModel = () => {
                     useRange={false}
                     asSingle={true}
                     popoverDirection="down"
-                    onChange={(values) => {
+                    onChange={(values: any) => {
                         setDeadlineDate(values)
                     }}
                     displayFormat="DD/MM/YYYY"

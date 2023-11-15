@@ -25,7 +25,7 @@ const FormModelMemberContent = () => {
 
     const initialFieldValues: FieldValue[] = formodalforload.eventData
         ? filteredItems.reduce((acc, component) => {
-              acc.push({ [component.componentId]: component.componentType === "date" ? null : "" });
+              acc.push({ [component.componentId]: component.componentType === "date" ? null : ""});
               return acc;
           }, [])
         : [];
@@ -37,7 +37,7 @@ const FormModelMemberContent = () => {
 
 
     //Handling ChekBox Change
-    const handleClicked = (index, id:string, optVal:string) => {
+    const handleClicked = (index: any, id:string, optVal:string) => {
         const newClickedOptions = [...clickedOptions];
         const limit_length = optionItemsCaptured?.filter(final => final.componentId === id)?.[(optionItemsCaptured.filter(obj => obj.componentId === id).length - 1)]?.limitValue;
         const limit_counter = newClickedOptions.filter(x => x === true).length;

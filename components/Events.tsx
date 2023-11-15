@@ -139,7 +139,7 @@ const EventsBox: React.FC<EventProps> = ({
     const handleResponses = (event_id: string) => {
         router.push(`/forms?id=${event_id}`)
     }
-    console.log("These are the registration Deadline" + new Date(new Date(data.Registration_Deadline).setHours(23, 59, 59)))
+    console.log("These are the registration Deadline" + new Date(new Date(data.Registration_Deadline ?? '').setHours(23, 59, 59)))
 
     //Handling Event Updation
     const eventUpdateModel = useEventUpdateModel();
@@ -227,7 +227,7 @@ const EventsBox: React.FC<EventProps> = ({
                                 </Button>
                             ):(
                                 data.registration_required ?(
-                                    <Button className={`w-3/5 text-white flex justify-center select-none truncate`} onClick={() => handleOnClick(data.event_id)} disabled={new Date(new Date(data.Registration_Deadline).setHours(23, 59, 59)) < new Date()}>
+                                    <Button className={`w-3/5 text-white flex justify-center select-none truncate`} onClick={() => handleOnClick(data.event_id)} disabled={new Date(new Date(data.Registration_Deadline ?? '').setHours(23, 59, 59)) < new Date()}>
                                         Create Form
                                     </Button>
                                 ):(
@@ -243,7 +243,7 @@ const EventsBox: React.FC<EventProps> = ({
                                 </Button>
                             ):(
                                 data.registration_required?(
-                                    new Date(new Date(data.Registration_Deadline).setHours(23, 59, 59)) < new Date() ? (
+                                    new Date(new Date(data.Registration_Deadline ?? '').setHours(23, 59, 59)) < new Date() ? (
                                         <Button className={`w-3/5 text-white flex justify-center select-none truncate`} onClick={() => {}} disabled={true}>
                                             Closed
                                         </Button>
@@ -266,7 +266,7 @@ const EventsBox: React.FC<EventProps> = ({
                             </Button>
                         ):(
                             data.registration_required ?(
-                                new Date(new Date(data.Registration_Deadline).setHours(23, 59, 59)) < new Date() ? (
+                                new Date(new Date(data.Registration_Deadline ?? '').setHours(23, 59, 59)) < new Date() ? (
                                     <Button className={`w-3/5 text-white flex justify-center select-none truncate`} onClick={() => {}} disabled={true}>
                                         Closed
                                     </Button>
