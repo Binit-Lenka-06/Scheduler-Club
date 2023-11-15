@@ -210,12 +210,6 @@ const EventUpdateModel = () => {
                         type="file"
                         accept="/image/*"
                         />
-                        <div className="text-center text-neutral-400">Current Logo</div>
-                        <div className="flex w-full h-fit justify-center">
-                            <div className="flex flex-row justify-between w-1/2 h-fit">
-                                <Image src={useLoadImageData(items) ?? "/images/OSS.svg"} alt="Image"/>
-                            </div>
-                        </div>
                         <Button onClick={() => {}} type="button">
                             Replace Old Image
                         </Button>

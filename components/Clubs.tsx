@@ -27,12 +27,12 @@ const Clubs: React.FC<ClubProps> = ({
                         </div>
                     </div>
                     <div className="w-[200px] h-[200px] max-w-[300px] max-h-[300px] rounded-full border-8 border-white absolute bottom-[-20px] right-[5px] bg-cover bg-black">
-                        <img src={ClubImage || "/images/oss.svg"} alt="" className="grayscale-0 z-10 club_image" />
+                        <Image src={ClubImage || "/images/oss.svg"} alt="" className="grayscale-0 z-10 club_image" />
                     </div>
                 </div>
                 <div className="card-back-1">
                     <div className="flex h-fit justify-center">
-                        <img src={ClubImage || "/images/oss.svg"} alt="" className="w-[140px] py-3 club_image" />
+                        <Image src={ClubImage || "/images/oss.svg"} alt="" className="w-[140px] py-3 club_image" />
                     </div>
                     <div className="flex flex-col gap-y-2">
                         <h3 className="text-lg font-sans">{ClubFullName}</h3>
