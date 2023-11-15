@@ -45,7 +45,7 @@ const FormContent: React.FC<FormContentProps> = ({ onDelete, viewMode, id, name,
         setLimitValue((parseInt(limitValue) + 1).toString())
         onOptionAddition({option_id:uniqueID, option_val:newOption, limit_val:(parseInt(limitValue)+1).toString()})
     };
-    const handleOptionChange = (index, value) => {
+    const handleOptionChange = (index: any, value: any) => {
         console.log("Changing option at index", index, "to value:", value);
         const newOptions = [...options];
         newOptions[index] = value;
@@ -55,13 +55,13 @@ const FormContent: React.FC<FormContentProps> = ({ onDelete, viewMode, id, name,
         onOptionChange(index, value)
     };
 
-    const handleLimitChange = (value) => {
+    const handleLimitChange = (value: any) => {
         setLimitValue(value)
         console.log("The current Limit Value is" + limitValue)
         setClickedOptions(Array(clickedOptions.length).fill(false))
         onLimitChange(value)
     }
-    const handleDeleteOption = (index) => {
+    const handleDeleteOption = (index: any) => {
         setOptions((prevOption) => 
         prevOption.filter((_, i) => i !== index)
         )
@@ -70,7 +70,7 @@ const FormContent: React.FC<FormContentProps> = ({ onDelete, viewMode, id, name,
         )
     }
 
-    const handleClicked = (index) => {
+    const handleClicked = (index: any) => {
         const newCheckbox = [...clickedOptions]
         const limit_counter = newCheckbox.filter(x => x === true).length;
         if(limit_counter < parseInt(limitValue)){
@@ -83,7 +83,7 @@ const FormContent: React.FC<FormContentProps> = ({ onDelete, viewMode, id, name,
         }
     }
 
-    const handleSelectChange = (event) => {
+    const handleSelectChange = (event: any) => {
         const value = event.target.value;
         setSelectedValue(value);
         onSelectChange(value)
@@ -91,7 +91,7 @@ const FormContent: React.FC<FormContentProps> = ({ onDelete, viewMode, id, name,
     };
     const [question, setQuestion] = useState('Enter your Question');
 
-    const handleContentChange = (event) => {
+    const handleContentChange = (event: any) => {
         const value = event.target.innerText;
         setQuestion(value);
         onInputChange(value)
@@ -121,7 +121,7 @@ const FormContent: React.FC<FormContentProps> = ({ onDelete, viewMode, id, name,
                 value={date}
                 useRange={false}
                 asSingle={true}
-                onChange={(values) => {
+                onChange={(values: any) => {
                     setDate(values)
                 }}
                 displayFormat="DD/MM/YYYY"

@@ -11,6 +11,7 @@ import { MdDelete } from "react-icons/md"
 import useLoadImageData from "@/hooks/useLoadImageData"
 import uniqid from "uniqid"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 const EventUpdateModel = () => {
 
@@ -63,7 +64,7 @@ const EventUpdateModel = () => {
     }
     const handleEventDateChange = async () =>{
         setIsLoading(true)
-        if((date.startDate !== null && enddate.startDate !== null) && (date.startDate < enddate.startDate) && (date.startDate > eventUpdateModel.event?.Registration_Deadline)){
+        if((date.startDate !== null && enddate.startDate !== null) && (date.startDate < enddate.startDate) && (date.startDate ?? new Date() > (eventUpdateModel.event?.Registration_Deadline ?? new Date()))){
             if(date.startDate !== null){
                 const {error} = await supabase
                     .from('events')
@@ -88,7 +89,7 @@ const EventUpdateModel = () => {
     }
     const hadleEventRegistrationDeadlineChange = async () => {
         setIsLoading(true)
-        if(registrationDealine.startDate < eventUpdateModel.event?.Event_Start_Data){
+        if(registrationDealine.startDate ?? new Date() < (eventUpdateModel.event?.Event_Start_Data ?? new Date())){
             const {error} = await supabase
                 .from('events')
                 .update({"Registration_Deadline": registrationDealine.startDate})
@@ -140,7 +141,7 @@ const EventUpdateModel = () => {
                         value={date}
                         useRange={false}
                         asSingle={true}
-                        onChange={(values) => {
+                        onChange={(values: any) => {
                             setDate(values)
                         }}
                         displayFormat="DD/MM/YYYY"
@@ -156,7 +157,7 @@ const EventUpdateModel = () => {
                         value={enddate}
                         useRange={false}
                         asSingle={true}
-                        onChange={(values) => {
+                        onChange={(values: any) => {
                             setendDate(values)
                         }}
                         displayFormat="DD/MM/YYYY"
@@ -180,7 +181,7 @@ const EventUpdateModel = () => {
                         value={registrationDealine}
                         useRange={false}
                         asSingle={true}
-                        onChange={(values) => {
+                        onChange={(values: any) => {
                             setregistrationDealine(values)
                         }}
                         displayFormat="DD/MM/YYYY"
@@ -212,7 +213,7 @@ const EventUpdateModel = () => {
                         <div className="text-center text-neutral-400">Current Logo</div>
                         <div className="flex w-full h-fit justify-center">
                             <div className="flex flex-row justify-between w-1/2 h-fit">
-                                <img src={useLoadImageData(items)} alt="Image"/>
+                                <Image src={useLoadImageData(items) ?? "/images/OSS.svg"} alt="Image"/>
                             </div>
                         </div>
                         <Button onClick={() => {}} type="button">
