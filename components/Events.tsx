@@ -129,11 +129,6 @@ const EventsBox: React.FC<EventProps> = ({
         top: `${scrollPosition}px`,
     };
     const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
-    const [downloadPrompt, setDownloadPrompt] = useState(false);
-    const handleLoadError = () => {
-        // This function will be called when the iframe encounters an error
-        setDownloadPrompt(true);
-    };
     const isFormRegistered = fetchedForm.some((form) => form.formId === data.event_id);
 
     const handleResponses = (event_id: string) => {
@@ -159,6 +154,7 @@ const EventsBox: React.FC<EventProps> = ({
 
         router.refresh()
     }
+    const fileData = useLoadFileData(AttachedFile);
     return(
         <>
         <div className={`w-full h-20 border rounded-xl p-3 flex flex-row items-center transition-all cursor-pointer ${isSelected? "border border-indigo-500 shadow-indigo-500 shadow-sm": "border-neutral-500 hover:shadow-indigo-500 hover:shadow-sm"} mainClass`} onClick={handleSingleClick}>
@@ -297,33 +293,22 @@ const EventsBox: React.FC<EventProps> = ({
                 <div className="text-xl font-bold text-white w-full flex justify-center pt-3 pb-1 px-3">Attachements</div>
                 <div className="text-sm loading-normal text-white w-full flex justify-center pb-5 px-3">These attachements have been ruled out as an extension of the event details</div>
                 <div className="w-full px-2 rounded-md">
-                    {downloadPrompt? (
-                        <div>
-                            <p>Unable to preview the file. Do you want to download it?</p>
-                            <button onClick={() => setDownloadPrompt(false)}>No</button>
-                            <a href={useLoadFileData(AttachedFile)} download>
-                            <button>Yes</button>
-                            </a>
-                        </div>
-                    ):(
-                        <div className="w-full px-2 rounded-md">
+                    <div className="w-full px-2 rounded-md">
                         {AttachedFile !== null ? (
                             <div className="w-full flex justify-center">
                             <iframe
                                 title="PDF Viewer"
-                                src={useLoadFileData(AttachedFile)}
+                                src={fileData}
                                 width="100%"
                                 height="600px"
                                 style={{ border: 'none' }}
                                 className="flex justify-center"
-                                onError={handleLoadError}
                             ></iframe>
                             </div>
                     ):(
                         <p className="w-full flex justify-center text-sm text-neutral-400 pb-4">No Attachments Uploaded</p>
                         )}
                     </div>
-                    )}
                 </div>
             </div>
         </div>
