@@ -2,7 +2,6 @@
 
 import EventsBox from "@/components/Events";
 import { Clubs, Events, Forms, Options, Registration, starred_events } from "@/types";
-import { useState } from "react";
 
 interface ScheduleComponentProps {
     filtered_events: Events[];
@@ -28,7 +27,6 @@ const ScheduleContent: React.FC<ScheduleComponentProps> =({
             </div>
         )
     }
-    const [clubName, setclubName] = useState('')
     console.log("This is the length received in Schedule Components" + fetchedOption.length)
     console.log("This is the length received in Schedule Components for FormData" + form_details.length)
     return(
