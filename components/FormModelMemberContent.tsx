@@ -10,7 +10,7 @@ import uniqid from "uniqid";
 import { FiCircle } from "react-icons/fi";
 
 interface FieldValue {
-    [key: string]: string | File | null;
+    [key: string]: string | File | null| any;
 }
 
 const FormModelMemberContent = () => {
@@ -23,12 +23,16 @@ const FormModelMemberContent = () => {
         ? formodalforload.eventData.filter((item) => item.formId === formodalforload.eventId)
         : [];
 
-    const initialFieldValues: FieldValue[] = formodalforload.eventData
-        ? filteredItems.reduce((acc, component) => {
-              acc.push({ [component.componentId]: component.componentType === "date" ? null : ""});
-              return acc;
-          }, [])
-        : [];
+    const initialFieldValues: FieldValue[] = (formodalforload.eventData || []).reduce((acc: FieldValue[], component) => {
+        if (component.componentType === "date") {
+            acc.push({ [component.componentId]: null });
+        } else {
+            acc.push({ [component.componentId]: "" });
+        }
+        return acc;
+        }, []);
+          
+      
 
     const optionItemsCaptured = formodalforload.componentOptions
     const [fieldValues, setFieldValues] = useState<FieldValue[]>(initialFieldValues);
@@ -82,12 +86,15 @@ const FormModelMemberContent = () => {
     };
 
     const handleFileChange = (componentId: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFieldValues((prevValues) =>
+        if (e.target.files) {
+          setFieldValues((prevValues) =>
             prevValues.map((field) =>
-                field.hasOwnProperty(componentId) ? { [componentId]: e.target.files[0] } : field
+              field.hasOwnProperty(componentId) ? { [componentId]: e.target.files?.[0] } : field
             )
-        );
-    };
+          );
+        }
+      };
+      
 
     const handleDateChange = (componentId: string) => (values: any) => {
         setDate(values);
