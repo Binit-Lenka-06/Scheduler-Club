@@ -11,7 +11,7 @@ interface EventUpdateModelStore {
 };
 
 const useEventUpdateModel = create<EventUpdateModelStore>((set) => ({
-    isOpen: true,
+    isOpen: false,
     onOpen: (id, data, events) => set({isOpen: true, eventId:id, eventData:data, event: events}),
     onClose: () => set({isOpen: false}),
     eventId: null,
