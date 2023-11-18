@@ -186,7 +186,7 @@ const EventModel = () => {
                     asSingle={true}
                     popoverDirection="down"
                     onChange={(values: any) => {
-                        setDate({startDate: values, endDate: values})
+                        setDate(values)
                     }}
                     displayFormat="DD/MM/YYYY"
                     inputClassName={"bg-[#404040] w-full rounded-md p-3 focus:ring-0 focus:outline-none placeholder:text-white text-white"}
